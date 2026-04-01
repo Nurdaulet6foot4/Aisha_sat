@@ -274,6 +274,9 @@ body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;background:#F4F
 
   dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); resetTimer(); }));
 
+  // Click on review to go next
+  track.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+
   // Swipe support
   track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; }, {passive:true});
   track.addEventListener('touchend', e => {

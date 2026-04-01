@@ -62,27 +62,34 @@ body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;background:#F4F
 .feature-title{font-size:13px;font-weight:700;color:#1E1B4B;margin-bottom:4px}
 .feature-desc{font-size:12px;color:#6B7280;line-height:1.5}
 
-/* Reviews Slider */
-.slider-wrap{position:relative;margin-bottom:4px;overflow:hidden;border-radius:20px}
-.slider-track{display:flex;width:100%;transition:transform 0.4s cubic-bezier(.22,1,.36,1)}
-.review{background:white;border-radius:20px;padding:28px 20px 22px;box-shadow:0 2px 16px rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.07);position:relative;flex:0 0 100%;width:100%;min-width:0}
-.review-quote{position:absolute;top:10px;left:16px;font-size:52px;font-weight:800;color:#EDE9FE;line-height:1}
-.review-text{font-size:14px;color:#4B5563;line-height:1.65;margin-bottom:12px;position:relative;z-index:1}
-.review-footer{display:flex;align-items:center;gap:10px}
-.review-ava{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:15px;flex-shrink:0}
-.ava-purple{background:linear-gradient(135deg,#C4B5FD,#7C3AED)}
-.ava-pink{background:linear-gradient(135deg,#F9A8D4,#EC4899)}
-.ava-indigo{background:linear-gradient(135deg,#A5B4FC,#6366F1)}
-.review-info .review-name{font-size:13px;font-weight:700;color:#1E1B4B}
-.review-info .review-meta{font-size:12px;color:#9CA3AF}
-.badge{display:inline-block;padding:3px 10px;border-radius:20px;margin-left:6px;background:linear-gradient(135deg,#7C3AED,#A78BFA);color:white;font-size:11px;font-weight:700}
+/* Photo Gallery */
+.gallery-wrap{position:relative;margin-bottom:4px;touch-action:pan-y}
+.gallery-slider{overflow:hidden;border-radius:20px;position:relative}
+.gallery-track{display:flex;transition:transform 0.4s cubic-bezier(.22,1,.36,1)}
+.gallery-slide{flex:0 0 100%;width:100%;min-width:0;position:relative}
+.gallery-slide img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:20px;user-select:none;-webkit-user-drag:none}
+.gallery-slide .ph{width:100%;aspect-ratio:4/3;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:15px;font-weight:600;color:rgba(255,255,255,0.85);letter-spacing:0.5px;gap:8px}
+.ph-1{background:linear-gradient(135deg,#7C3AED,#A78BFA)}
+.ph-2{background:linear-gradient(135deg,#EC4899,#F9A8D4)}
+.ph-3{background:linear-gradient(135deg,#6366F1,#A5B4FC)}
+.ph-4{background:linear-gradient(135deg,#059669,#6EE7B7)}
+.ph-5{background:linear-gradient(135deg,#D97706,#FCD34D)}
 
-/* Stars */
-.stars{color:#F59E0B;font-size:13px;margin-bottom:8px;letter-spacing:1px}
+/* Caption */
+.gallery-caption{text-align:center;margin-top:10px;font-size:12px;color:#9CA3AF;font-weight:500;min-height:18px}
+
+/* Nav arrows */
+.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 10px rgba(0,0,0,0.15);transition:all 0.2s;-webkit-tap-highlight-color:transparent}
+.gallery-arrow:active{transform:translateY(-50%) scale(0.9)}
+.gallery-prev{left:10px}.gallery-next{right:10px}
+.gallery-arrow svg{width:16px;height:16px;stroke:#7C3AED;stroke-width:2.5;fill:none}
+
+/* Counter */
+.gallery-counter{position:absolute;top:10px;right:12px;background:rgba(0,0,0,0.45);color:white;font-size:12px;font-weight:600;padding:3px 9px;border-radius:20px;z-index:2}
 
 /* Slider dots */
-.slider-dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
-.dot{width:8px;height:8px;border-radius:50%;background:rgba(139,92,246,0.2);border:none;cursor:pointer;padding:0;transition:all 0.3s}
+.slider-dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(139,92,246,0.2);border:none;cursor:pointer;padding:0;transition:all 0.3s;-webkit-tap-highlight-color:transparent}
 .dot.active{width:24px;border-radius:4px;background:#7C3AED}
 
 /* Contact buttons */
@@ -172,56 +179,45 @@ body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;background:#F4F
     </div>
   </div>
 
-  <!-- Reviews Slider -->
-  <div class="section-title fi d10">Отзывы учеников</div>
+  <!-- Photo Gallery -->
+  <div class="section-title fi d10">Наши ученики</div>
 
-  <div class="slider-wrap fi d10">
-    <div class="slider-track" id="sliderTrack">
+  <div class="gallery-wrap fi d10">
+    <div class="gallery-slider" id="gallerySlider">
+      <div class="gallery-track" id="galleryTrack">
 
-      <div class="review">
-        <div class="review-quote">"</div>
-        <div class="stars" aria-label="5 звёзд">★★★★★</div>
-        <div class="review-text">Пришёл с 980 баллов. Через 3 месяца — 1340. Объясняют так, что даже Math перестал пугать. Лучшее вложение в будущее.</div>
-        <div class="review-footer">
-          <div class="review-ava ava-purple" aria-hidden="true">А</div>
-          <div class="review-info">
-            <div class="review-name">Арман, 10 класс <span class="badge">+360</span></div>
-            <div class="review-meta">Астана · 3 месяца на курсе</div>
-          </div>
-        </div>
+        <div class="gallery-slide"><img src="images/photo1.jpg" alt="Результат ученика 1580" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-1" style="display:none">📸 Фото 1</div></div>
+        <div class="gallery-slide"><img src="images/photo2.jpg" alt="Отзыв ученика" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-2" style="display:none">📸 Фото 2</div></div>
+        <div class="gallery-slide"><img src="images/photo3.jpg" alt="Результат SAT 1540" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-3" style="display:none">📸 Фото 3</div></div>
+        <div class="gallery-slide"><img src="images/photo4.jpg" alt="Результат SAT 1420" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-4" style="display:none">📸 Фото 4</div></div>
+        <div class="gallery-slide"><img src="images/photo5.jpg" alt="Отзывы учеников" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-5" style="display:none">📸 Фото 5</div></div>
+        <div class="gallery-slide"><img src="images/photo6.jpg" alt="Результат ученика 6" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-1" style="display:none">📸 Фото 6</div></div>
+        <div class="gallery-slide"><img src="images/photo7.jpg" alt="Результат ученика 7" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-2" style="display:none">📸 Фото 7</div></div>
+        <div class="gallery-slide"><img src="images/photo8.jpg" alt="Результат ученика 8" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-3" style="display:none">📸 Фото 8</div></div>
+        <div class="gallery-slide"><img src="images/photo9.jpg" alt="Результат ученика 9" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-4" style="display:none">📸 Фото 9</div></div>
+        <div class="gallery-slide"><img src="images/photo10.jpg" alt="Результат ученика 10" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="ph ph-5" style="display:none">📸 Фото 10</div></div>
+
       </div>
-
-      <div class="review">
-        <div class="review-quote">"</div>
-        <div class="stars" aria-label="5 звёзд">★★★★★</div>
-        <div class="review-text">Reading and Writing казался невозможным — не понимала логику вопросов. После курса начала видеть паттерны и набрала 730 по секции. Спасибо!</div>
-        <div class="review-footer">
-          <div class="review-ava ava-pink" aria-hidden="true">Д</div>
-          <div class="review-info">
-            <div class="review-name">Диана, 11 класс <span class="badge">+290</span></div>
-            <div class="review-meta">Алматы · 4 месяца на курсе</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="review">
-        <div class="review-quote">"</div>
-        <div class="stars" aria-label="5 звёзд">★★★★★</div>
-        <div class="review-text">Начал за 2 месяца до экзамена с 1050. Итог — 1290. Структура занятий чёткая, домашние задания реально помогают. Поступил в университет мечты!</div>
-        <div class="review-footer">
-          <div class="review-ava ava-indigo" aria-hidden="true">Т</div>
-          <div class="review-info">
-            <div class="review-name">Тимур, 12 класс <span class="badge">+240</span></div>
-            <div class="review-meta">Астана · 2 месяца на курсе</div>
-          </div>
-        </div>
-      </div>
-
+      <div class="gallery-counter" id="galleryCounter">1 / 5</div>
+      <button class="gallery-arrow gallery-prev" id="galleryPrev" aria-label="Предыдущее фото">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="gallery-arrow gallery-next" id="galleryNext" aria-label="Следующее фото">
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+      </button>
     </div>
-    <div class="slider-dots" id="sliderDots">
-      <button class="dot active" aria-label="Отзыв 1"></button>
-      <button class="dot" aria-label="Отзыв 2"></button>
-      <button class="dot" aria-label="Отзыв 3"></button>
+    <div class="gallery-caption" id="galleryCaption">Наши ученики и занятия</div>
+    <div class="slider-dots" id="galleryDots">
+      <button class="dot active" aria-label="Фото 1"></button>
+      <button class="dot" aria-label="Фото 2"></button>
+      <button class="dot" aria-label="Фото 3"></button>
+      <button class="dot" aria-label="Фото 4"></button>
+      <button class="dot" aria-label="Фото 5"></button>
+      <button class="dot" aria-label="Фото 6"></button>
+      <button class="dot" aria-label="Фото 7"></button>
+      <button class="dot" aria-label="Фото 8"></button>
+      <button class="dot" aria-label="Фото 9"></button>
+      <button class="dot" aria-label="Фото 10"></button>
     </div>
   </div>
 
@@ -258,35 +254,55 @@ body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;background:#F4F
 </div>
 <script>
 (function(){
-  const track = document.getElementById('sliderTrack');
-  const dots = document.querySelectorAll('.dot');
-  let current = 0, startX = 0, dragging = false, timer;
+  const track = document.getElementById('galleryTrack');
+  const dots = document.querySelectorAll('#galleryDots .dot');
+  const counter = document.getElementById('galleryCounter');
   const total = dots.length;
+  let current = 0, startX = 0, startY = 0, dragging = false;
+
+  const captions = [
+    'Результат 1580 — преподаватель Аиша 🏆',
+    'Математика выросла с 530 до 790 за 2 месяца 🚀',
+    'SAT 1540 — ноябрь 2025 🎯',
+    'SAT 1420 — октябрь 2025 💪',
+    'Наши ученики делятся результатами ⭐',
+    'Результат ученика 🎓',
+    'Результат ученика 🎓',
+    'Результат ученика 🎓',
+    'Результат ученика 🎓',
+    'Результат ученика 🎓'
+  ];
 
   function goTo(i) {
     current = (i + total) % total;
     track.style.transform = 'translateX(-' + (current * 100) + '%)';
     dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+    counter.textContent = (current + 1) + ' / ' + total;
+    const cap = document.getElementById('galleryCaption');
+    if (cap) cap.textContent = captions[current] || '';
   }
 
-  function resetTimer() { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 5000); }
+  dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+  document.getElementById('galleryPrev').addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+  document.getElementById('galleryNext').addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
 
-  dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); resetTimer(); }));
+  // Touch swipe
+  track.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    dragging = true;
+  }, {passive: true});
 
-  // Click on review to go next
-  track.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
-
-  // Swipe support
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; }, {passive:true});
   track.addEventListener('touchend', e => {
     if (!dragging) return;
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) { goTo(current + (diff > 0 ? 1 : -1)); resetTimer(); }
+    const dx = startX - e.changedTouches[0].clientX;
+    const dy = Math.abs(startY - e.changedTouches[0].clientY);
+    if (Math.abs(dx) > 40 && Math.abs(dx) > dy) goTo(current + (dx > 0 ? 1 : -1));
     dragging = false;
   });
 
-  // Auto-advance every 5s
-  resetTimer();
+  // Click to go next
+  track.addEventListener('click', () => goTo(current + 1));
 })();
 </script>
 </body>

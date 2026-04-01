@@ -62,9 +62,10 @@ body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;background:#F4F
 .feature-title{font-size:13px;font-weight:700;color:#1E1B4B;margin-bottom:4px}
 .feature-desc{font-size:12px;color:#6B7280;line-height:1.5}
 
-/* Reviews */
-.review{background:white;border-radius:20px;padding:22px 20px;margin-bottom:10px;box-shadow:0 2px 16px rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.07);position:relative;transition:transform 0.2s,box-shadow 0.2s}
-.review:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,92,246,0.12)}
+/* Reviews Slider */
+.slider-wrap{position:relative;margin-bottom:4px;overflow:hidden}
+.slider-track{display:flex;transition:transform 0.4s cubic-bezier(.22,1,.36,1)}
+.review{background:white;border-radius:20px;padding:22px 20px;box-shadow:0 2px 16px rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.07);position:relative;min-width:100%;flex-shrink:0}
 .review-quote{position:absolute;top:10px;left:16px;font-size:52px;font-weight:800;color:#EDE9FE;line-height:1}
 .review-text{font-size:14px;color:#4B5563;line-height:1.65;margin-bottom:12px;position:relative;z-index:1}
 .review-footer{display:flex;align-items:center;gap:10px}
@@ -78,6 +79,11 @@ body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;background:#F4F
 
 /* Stars */
 .stars{color:#F59E0B;font-size:13px;margin-bottom:8px;letter-spacing:1px}
+
+/* Slider dots */
+.slider-dots{display:flex;justify-content:center;gap:8px;margin-top:14px}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(139,92,246,0.2);border:none;cursor:pointer;padding:0;transition:all 0.3s}
+.dot.active{width:24px;border-radius:4px;background:#7C3AED}
 
 /* Contact buttons */
 .msg-row{display:flex;gap:10px;margin-bottom:10px}
@@ -166,45 +172,56 @@ body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;background:#F4F
     </div>
   </div>
 
-  <!-- Reviews -->
+  <!-- Reviews Slider -->
   <div class="section-title fi d10">Отзывы учеников</div>
 
-  <div class="review fi d10">
-    <div class="review-quote">"</div>
-    <div class="stars" aria-label="5 звёзд">★★★★★</div>
-    <div class="review-text">Пришёл с 980 баллов. Через 3 месяца — 1340. Объясняют так, что даже Math перестал пугать. Лучшее вложение в будущее.</div>
-    <div class="review-footer">
-      <div class="review-ava ava-purple" aria-hidden="true">А</div>
-      <div class="review-info">
-        <div class="review-name">Арман, 10 класс <span class="badge">+360</span></div>
-        <div class="review-meta">Астана · 3 месяца на курсе</div>
-      </div>
-    </div>
-  </div>
+  <div class="slider-wrap fi d10">
+    <div class="slider-track" id="sliderTrack">
 
-  <div class="review fi d11">
-    <div class="review-quote">"</div>
-    <div class="stars" aria-label="5 звёзд">★★★★★</div>
-    <div class="review-text">Reading and Writing казался невозможным — не понимала логику вопросов. После курса начала видеть паттерны и набрала 730 по секции. Спасибо!</div>
-    <div class="review-footer">
-      <div class="review-ava ava-pink" aria-hidden="true">Д</div>
-      <div class="review-info">
-        <div class="review-name">Диана, 11 класс <span class="badge">+290</span></div>
-        <div class="review-meta">Алматы · 4 месяца на курсе</div>
+      <div class="review">
+        <div class="review-quote">"</div>
+        <div class="stars" aria-label="5 звёзд">★★★★★</div>
+        <div class="review-text">Пришёл с 980 баллов. Через 3 месяца — 1340. Объясняют так, что даже Math перестал пугать. Лучшее вложение в будущее.</div>
+        <div class="review-footer">
+          <div class="review-ava ava-purple" aria-hidden="true">А</div>
+          <div class="review-info">
+            <div class="review-name">Арман, 10 класс <span class="badge">+360</span></div>
+            <div class="review-meta">Астана · 3 месяца на курсе</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="review fi d12">
-    <div class="review-quote">"</div>
-    <div class="stars" aria-label="5 звёзд">★★★★★</div>
-    <div class="review-text">Начал за 2 месяца до экзамена с 1050. Итог — 1290. Структура занятий чёткая, домашние задания реально помогают. Поступил в университет мечты!</div>
-    <div class="review-footer">
-      <div class="review-ava ava-indigo" aria-hidden="true">Т</div>
-      <div class="review-info">
-        <div class="review-name">Тимур, 12 класс <span class="badge">+240</span></div>
-        <div class="review-meta">Астана · 2 месяца на курсе</div>
+      <div class="review">
+        <div class="review-quote">"</div>
+        <div class="stars" aria-label="5 звёзд">★★★★★</div>
+        <div class="review-text">Reading and Writing казался невозможным — не понимала логику вопросов. После курса начала видеть паттерны и набрала 730 по секции. Спасибо!</div>
+        <div class="review-footer">
+          <div class="review-ava ava-pink" aria-hidden="true">Д</div>
+          <div class="review-info">
+            <div class="review-name">Диана, 11 класс <span class="badge">+290</span></div>
+            <div class="review-meta">Алматы · 4 месяца на курсе</div>
+          </div>
+        </div>
       </div>
+
+      <div class="review">
+        <div class="review-quote">"</div>
+        <div class="stars" aria-label="5 звёзд">★★★★★</div>
+        <div class="review-text">Начал за 2 месяца до экзамена с 1050. Итог — 1290. Структура занятий чёткая, домашние задания реально помогают. Поступил в университет мечты!</div>
+        <div class="review-footer">
+          <div class="review-ava ava-indigo" aria-hidden="true">Т</div>
+          <div class="review-info">
+            <div class="review-name">Тимур, 12 класс <span class="badge">+240</span></div>
+            <div class="review-meta">Астана · 2 месяца на курсе</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="slider-dots" id="sliderDots">
+      <button class="dot active" aria-label="Отзыв 1"></button>
+      <button class="dot" aria-label="Отзыв 2"></button>
+      <button class="dot" aria-label="Отзыв 3"></button>
     </div>
   </div>
 
@@ -240,5 +257,33 @@ body{font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;background:#F4F
   </div>
 
 </div>
+<script>
+(function(){
+  const track = document.getElementById('sliderTrack');
+  const dots = document.querySelectorAll('.dot');
+  let current = 0, startX = 0, dragging = false;
+  const total = dots.length;
+
+  function goTo(i) {
+    current = (i + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === current));
+  }
+
+  dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+  // Swipe support
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    if (!dragging) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+    dragging = false;
+  });
+
+  // Auto-advance every 5s
+  setInterval(() => goTo(current + 1), 5000);
+})();
+</script>
 </body>
 </html>
